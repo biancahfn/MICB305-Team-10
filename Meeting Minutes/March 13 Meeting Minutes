@@ -1,0 +1,21 @@
+MICB 305 March 13
+
+- Try to get all analysis done before next week team meeting
+- Look at UJEMI papers for figure captions and figure legibility
+- Finetune question about microbiota
+- Panel strains vs individual strains
+    - Do aim 2 then figure out whether to do both or either or
+    - Ex. Correlate bacteria (y) and iron biomarkers (x) w each other 
+- Double check everything when exporting from Google Docs to words
+
+
+For panel strains in Aim 4:
+1. For multiple strains / pathways, calculate a compositional score based on CLR (centred log ratio)[good for phyloseq objects]
+    1. Use subset_taxa() to pull out strains of interest
+    2. Extract ASV table from this subset
+    3. Add pseudocount to avoid log(0) [search it up: add 1 to have no zero values]
+    4. Calculate CLR using clr(asv_table) and then create compositional score by summing
+    5. Merge with metadata to create final table of data
+2. Spearman correlation matrices for haemoglobin, ferritin, and microbial score
+3. Linear regression of microbiome ~ haemoglobin and/or ferritin
+4. Multiple linear regression integrating microbiome and predicted function?
