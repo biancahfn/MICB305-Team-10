@@ -1,12 +1,14 @@
+
+# Creating the PhyloSeq Object ####
+
+# Loading Data
 library(phyloseq)
 library(microbiome)
 library(tidyverse)
 library(ggVennDiagram)
 library(indicspecies)
+library(ANCOMBC)
 
-# Creating the PhyloSeq Object ####
-
-# Loading Data
 
 taxonomy = read.delim('Datasets/taxonomy.tsv',
                       row.names = 1)
@@ -34,7 +36,7 @@ taxonomy_formatted = taxonomy %>%
 counts_formatted = counts %>% as.matrix()
 colnames(counts_formatted) = sub("^X", "", colnames(counts_formatted))
 meta_data = read.delim('Datasets/anemia_metadata.txt', row.names = 1, skip = 1, header = F)
-names(meta_data) = meta_names
+meta_names = names(meta_data) 
 
 # Creating the phyloseq object
 
@@ -64,7 +66,7 @@ ASVs_FeSO4 = core_members(supplement.FeSO4, detection = 0.001, prevalence = 0.8)
 ASVs_None = core_members(supplement.None, detection = 0.001, prevalence = 0.8)
 
 ggVennDiagram(list(ASVs_MNP, ASVs_FeSO4, ASVs_None),
-              set_size = 6,
+              set_size = 4,
               category.names = c("MNP", "FeSO4", "None"))
 
 # Indicator Species Analysis ####
@@ -103,8 +105,9 @@ statistical_table = out$res
 # Filter stats to include taxa that are differentially abundant between MNP and FeSO4
 
 MNP_vs_FeSO4 = statistical_table %>%
-  filter(diff_robust_supplementMNP == T) 
+  filter(diff_robust_supplementMNP==T) 
 # Note:Not sure if this code is correct because I can't see the table. Edit if needed (See module 14)
+# No supplements and control passed the stress test and have a p value less than 0.05
 
 # Making the table
 
