@@ -1,16 +1,116 @@
-# The Core Microbiome
-
 library(phyloseq)
 library(microbiome)
 library(tidyverse)
+library(ggVennDiagram)
+library(indicspecies)
 
-# loading data
+# Creating the PhyloSeq Object ####
 
-taxonomy = read.delim('Datasets/taxonomy.tsv')
+# Loading Data
+
+taxonomy = read.delim('Datasets/taxonomy.tsv',
+                      row.names = 1)
+
 tree = read_tree('Datasets/tree.nwk')
 
-counts = read.delim('Datasets/anemia-feature-table.txt')
+counts = read.delim("Datasets/anemia-feature-table.txt", 
+                    skip =1,
+                    row.names =1 )
+
 metadata = read.delim("Datasets/anemia_metadata.txt",
                       header = TRUE,
-                      sep = "",
+                      sep = "\t",
                       row.names = 1)
+
+# Wrangling Data
+
+taxonomy_formatted = taxonomy %>% 
+  separate(col = Taxon,
+           into = c('Domain', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species' ),
+           sep=';', fill = 'right')%>%
+  select(-Confidence) %>%
+  as.matrix()
+
+counts_formatted = counts %>% as.matrix()
+colnames(counts_formatted) = sub("^X", "", colnames(counts_formatted))
+meta_data = read.delim('Datasets/anemia_metadata.txt', row.names = 1, skip = 1, header = F)
+names(meta_data) = meta_names
+
+# Creating the phyloseq object
+
+ps = phyloseq(sample_data(metadata),
+              otu_table(counts_formatted, taxa_are_rows = T),
+              tax_table(taxonomy_formatted),
+              tree)
+
+saveRDS(ps, 'Datasets/phyloseq_taxonomy.rds')
+
+# The Core Microbiome ####
+
+psrare = rarefy_even_depth(ps, sample.size = 3956)
+ps_rare_relab = transform(psrare, 'compositional')
+ps_rare_relab_genus = tax_glom(ps_rare_relab, 'Genus')
+
+# Subsetting the phyloseq object
+
+supplement.MNP = subset_samples(ps_rare_relab_genus, supplement == "MNP")
+supplement.FeSO4 = subset_samples(ps_rare_relab_genus, supplement == "FeSO4")
+supplement.None = subset_samples(ps_rare_relab_genus, supplement == "None")
+
+# Finding the core members
+
+ASVs_MNP = core_members(supplement.MNP, detection = 0.001, prevalence = 0.8)
+ASVs_FeSO4 = core_members(supplement.FeSO4, detection = 0.001, prevalence = 0.8)
+ASVs_None = core_members(supplement.None, detection = 0.001, prevalence = 0.8)
+
+ggVennDiagram(list(ASVs_MNP, ASVs_FeSO4, ASVs_None),
+              set_size = 6,
+              category.names = c("MNP", "FeSO4", "None"))
+
+# Indicator Species Analysis ####
+
+# Aggregating ASVs to a higher taxonomic level, converting phyloseq to relative
+# abundance, and applying abundance filter
+
+ps_phylum = tax_glom(ps, 'Phylum')
+ps_relab = transform(ps_phylum, 'compositional')
+ps_filt = filter_taxa(ps_relab, function(x) mean (x) > 0.001, TRUE)
+otu_table = as.data.frame(otu_table(ps_filt))
+
+set.seed(421)
+indval = multipatt(t(otu_table),
+                   cluster = ps_filt@sam_data$supplement,
+                   control = how(nperm = 999))
+
+summary(indval, indvalcomp = TRUE)
+
+indval_table = as.data.frame(indval$sign)
+
+# Not sure if I am going to visualize this data. I will get back to this later. 
+
+# Differential Abundance #### 
+
+ps_glom = tax_glom(ps, 'Genus')
+
+set.seed(421)
+out = ancombc2(data = ps_glom,
+               fix_formula = 'supplement',
+               p_adj_method = 'BH',
+               prv_cut = 0.1)
+
+statistical_table = out$res
+
+# Filter stats to include taxa that are differentially abundant between MNP and FeSO4
+
+MNP_vs_FeSO4 = statistical_table %>%
+  filter(diff_robust_supplementMNP == T) 
+# Note:Not sure if this code is correct because I can't see the table. Edit if needed (See module 14)
+
+# Making the table
+
+MNP_vs_FeSO4 %>%
+  ggplot(aes(taxon, lfc_supplementMNP)) +
+  geom_col() +
+  coord_flip()
+
+
