@@ -1,0 +1,119 @@
+---
+title: "PICRUSt"
+author: "Aidan Chance"
+date: "2026-03-18"
+output: html_document
+---
+
+# Loading packages
+
+```{r}
+
+library(tidyverse)
+library(ggpicrust2)
+library(phyloseq)
+```
+
+# Loading and filtering metadata and MetaCyc data
+
+```{r}
+
+metadata = read.csv('anemia_metadata.csv', row.names = 1) %>% 
+  rownames_to_column('sample_name') %>%
+  filter(supplement %in% c("MNP","FeSO4","None"), 
+         age_months == 12,
+         anemia == "anemic") %>% 
+  select(sample_name, supplement) %>% 
+  filter(!if_any(everything(), ~ . == "Missing: Not collected"))
+
+metadata_mnp_none = metadata %>% 
+  filter(supplement %in% c('MNP', 'None'))
+
+metadata_mnp_feso4 = metadata %>% 
+  filter(supplement %in% c('MNP', 'FeSO4'))
+
+metadata_feso4_none = metadata %>% 
+  filter(supplement %in% c('FeSO4', 'None'))
+  
+  
+metacyc_data_mnp_none = read.delim('path_abun_unstrat.tsv', 
+                          row.names = 1,
+                          check.names = FALSE) %>% 
+  select(all_of(metadata_mnp_none$sample_name))  
+
+metacyc_data_mnp_feso4 = read.delim('path_abun_unstrat.tsv', 
+                          row.names = 1,
+                          check.names = FALSE) %>% 
+  select(all_of(metadata_mnp_feso4$sample_name))
+
+metacyc_data_feso4_none = read.delim('path_abun_unstrat.tsv', 
+                          row.names = 1,
+                          check.names = FALSE) %>% 
+  select(all_of(metadata_feso4_none$sample_name))
+```
+
+# Maaslin2
+
+```{r}
+
+library(Maaslin2)
+
+daa_results_df_mnp_none = pathway_daa(abundance = metacyc_data_mnp_none,
+                             metadata = metadata_mnp_none,
+                             group = 'supplement',
+                             daa_method = 'Maaslin2',
+                             select = NULL, reference = NULL)
+
+daa_results_df_mnp_feso4 = pathway_daa(abundance = metacyc_data_mnp_feso4,
+                             metadata = metadata_mnp_feso4,
+                             group = 'supplement',
+                             daa_method = 'Maaslin2',
+                             select = NULL, reference = NULL)
+
+daa_results_df_feso4_none = pathway_daa(abundance = metacyc_data_feso4_none,
+                             metadata = metadata_feso4_none,
+                             group = 'supplement',
+                             daa_method = 'Maaslin2',
+                             select = NULL, reference = NULL)
+```
+
+# Annotations
+
+```{r}
+
+daa_annotated_results_df_mnp_none = pathway_annotation(pathway = "MetaCyc",
+                                              daa_results_df = daa_results_df_mnp_none,
+                                              ko_to_kegg = FALSE)
+
+daa_annotated_results_df_mnp_feso4 = pathway_annotation(pathway = "MetaCyc",
+                                              daa_results_df = daa_results_df_mnp_feso4,
+                                              ko_to_kegg = FALSE)
+
+daa_annotated_results_df_feso4_none = pathway_annotation(pathway = "MetaCyc",
+                                              daa_results_df = daa_results_df_feso4_none,
+                                              ko_to_kegg = FALSE)
+```
+
+# Visualization
+
+```{r}
+
+# source('ggpicrust2_errorbar_function_fixed.R')
+
+daa_annotated_results_df_mnp_none %>% filter(p_adjust < 0.05) %>% nrow()
+
+daa_annotated_results_df_mnp_feso4 %>% filter(p_adjust < 0.05) %>% nrow()
+
+daa_annotated_results_df_feso4_none %>% filter(p_adjust < 0.05) %>% nrow()
+
+#peb_mnp_none = pathway_errorbar_fixed(abundance = metacyc_data_mnp_none,
+#                                      daa_results_df = daa_annotated_results_df_mnp_none,
+#                                      Group = metadata_mnp_none$supplement,
+#                                      wrap_label = T, wraplength = 60,
+#                                      fc_cutoff = 5, order_by_log = F,
+#                                      p_values_threshold = 0.05,
+#                                      order = "p_values",
+#                                      ko_to_kegg = F,
+#                                      p_value_bar = T,
+#                                      x_lab = "Pathway Name")
+```
