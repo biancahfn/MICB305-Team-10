@@ -19,10 +19,18 @@ counts = read.delim("Datasets/anemia-feature-table.txt",
                     skip =1,
                     row.names =1 )
 
+#Filter out missing and other from supplements
+#Filter for 12 month olds and anemic
+
 metadata = read.delim("Datasets/anemia_metadata.txt",
                       header = TRUE,
                       sep = "\t",
-                      row.names = 1)
+                      row.names = 1)%>%
+  filter(supplement %in% c("MNP","FeSO4","None"), 
+         age_months == 12,
+         anemia == "anemic") %>% 
+  select(supplement) %>% 
+  filter(!if_any(everything(), ~ . == "Missing: Not collected"))
 
 # Wrangling Data
 
@@ -88,6 +96,11 @@ summary(indval, indvalcomp = TRUE)
 
 indval_table = as.data.frame(indval$sign)
 
+taxonomy_f = as.data.frame(taxonomy_formatted)
+
+signif_taxa = indval_table %>%
+  left_join(taxonomy_f, by = colnames(...))
+
 # Not sure if I am going to visualize this data. I will get back to this later. 
 
 # Differential Abundance #### 
@@ -98,7 +111,7 @@ set.seed(421)
 out = ancombc2(data = ps_glom,
                fix_formula = 'supplement',
                p_adj_method = 'BH',
-               prv_cut = 0.1)
+               prv_cut = 0.5)
 
 statistical_table = out$res
 
