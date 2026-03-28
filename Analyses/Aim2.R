@@ -8,6 +8,7 @@ library(tidyverse)
 library(ggVennDiagram)
 library(indicspecies)
 library(ANCOMBC)
+library(Maaslin2)
 
 
 taxonomy = read.delim('Datasets/taxonomy.tsv',
@@ -96,6 +97,8 @@ summary(indval, indvalcomp = TRUE)
 
 indval_table = as.data.frame(indval$sign)
 
+# signif_taxa = indval_table %>%
+#   left_join(taxonomy_f, by = colnames(...))
 
 
 # Not sure if I am going to visualize this data. I will get back to this later. 
@@ -109,6 +112,23 @@ out = ancombc2(data = ps_glom,
                fix_formula = 'supplement',
                p_adj_method = 'BH',
                prv_cut = 0.5)
+
+out = Maaslin2(
+  input_data = data.frame(ps_glom@otu_table), 
+  input_metadata = data.frame(ps_glom@sam_data), 
+  output = 'to_delete', 
+  fixed_effects = c('supplement'),
+  reference = 'supplement,FeSO4,MNP,None',
+  # TSS is Total Sum Scaled, AKA relative abundance.
+  normalization = 'TSS',
+  # Arcsine transformation is recommended for relative abundance data.
+  transform = 'AST',
+  # Set abundance, prevalence, Padj value thresholds
+  min_abundance = 0.001, # 0.001 means 0.1% relative abundance
+  min_prevalence = 0.1, # 0.1 means 10% of samples
+  max_significance = 0.05, # Padj threshold
+)
+
 
 statistical_table = out$res
 
