@@ -96,10 +96,7 @@ summary(indval, indvalcomp = TRUE)
 
 indval_table = as.data.frame(indval$sign)
 
-taxonomy_f = as.data.frame(taxonomy_formatted)
 
-signif_taxa = indval_table %>%
-  left_join(taxonomy_f, by = colnames(...))
 
 # Not sure if I am going to visualize this data. I will get back to this later. 
 
