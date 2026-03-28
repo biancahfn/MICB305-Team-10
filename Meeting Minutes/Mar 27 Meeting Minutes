@@ -1,0 +1,53 @@
+Mar 27 Meeting
+
+- Rerun differential abundance with Maaslin2
+- See if there are significant indicator species
+- If there is then run the panel strains but if not don’t do it
+
+Aim 1
+- Since there is no sig diff between anemic kids - alpha
+- Run with faiths and smth else
+- Beta - none group clumps tgt
+    - If circle is too small then we cannot rely on p value
+    - Not too much diff as well
+
+Aim 2
+- Can put as supplementary graph
+    - Not significant 
+
+Aim 3
+- No correlation
+
+Aim 4 
+- Can ignore for now until differential abundance is done with Maaslin2
+- Just do linear regression with alpha 
+
+
+Manuscript 
+- Can include more results here
+- Figure 1 - one alpha and one beta w p values
+    - Supplementary - add the rest of the plots (4 alpha and 3 beta)
+- Figure 2 - diff abundance - volcano plot
+    - Indicator species in supplementary
+- Big log 2 fold change might be bc of small group and can mention how something were trending w large log 2 fold changes and say we need bigger sample size
+- Figure 3 -  pircrust volcano and pca plot
+    - Add non significant tables in supplementary
+    - Stat value, what were measuring
+- Captions need to show that there is no significant 
+- Explain results in biological way
+
+
+Presentation
+- Null results
+- Pca plot for metacyc pathways
+    - Shows that all points overlap
+    - Similar to beta diversity
+- Alpha and beta - just pick one to show
+    - No significant as main point
+    - “No significant between supplementation and group” <= title smth along this line
+- Present volcano plot for diff abundance and picrust
+    - And indicator species
+- Dont need to mention aim 4 but talk about how this affects the children 
+    - Ex. Don’t have to worry about getting inflammation when taking supplements 
+    - Reference papers from proposal
+- Strong intro, 3 slides of results, inference, and future direction
