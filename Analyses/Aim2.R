@@ -156,6 +156,11 @@ statistical_table_MNP <- statistical_table_MNP %>%
         axis.title = element_text(size=12),
         legend.position = "bottom")
 
+statistical_table_MNP
+
+ggsave("Volcano Plot MNP.png",
+       plot = statistical_table_MNP, width = 18, height = 10)
+
 # FeSO4 vs. None
 
 statistical_table_FeSO4 <- statistical_table %>%
@@ -176,4 +181,7 @@ statistical_table_FeSO4 <- statistical_table_FeSO4 %>%
         axis.title = element_text(size=12),
         legend.position = "bottom")
 
+statistical_table_FeSO4
 
+ggsave("Volcano Plot FeSO4.png",
+       plot = statistical_table_FeSO4, width = 18, height = 10)
