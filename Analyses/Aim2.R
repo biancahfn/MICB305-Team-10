@@ -118,7 +118,7 @@ out = Maaslin2(
   input_metadata = data.frame(ps_glom@sam_data), 
   output = 'to_delete', 
   fixed_effects = c('supplement'),
-  reference = 'supplement,FeSO4,MNP,None',
+  reference = 'supplement,None',
   # TSS is Total Sum Scaled, AKA relative abundance.
   normalization = 'TSS',
   # Arcsine transformation is recommended for relative abundance data.
@@ -130,20 +130,50 @@ out = Maaslin2(
 )
 
 
-statistical_table = out$res
+statistical_table = out$results %>%
+  mutate(log2fc = log2(exp(coef)),
+         significant = qval<=0.05)
 
-# Filter stats to include taxa that are differentially abundant between MNP and FeSO4
+# Plotting the volcanoes
 
-MNP_vs_FeSO4 = statistical_table %>%
-  filter(diff_robust_supplementMNP==T) 
-# Note:Not sure if this code is correct because I can't see the table. Edit if needed (See module 14)
-# No supplements and control passed the stress test and have a p value less than 0.05
+# MNP vs. None
 
-# Making the table
+statistical_table_MNP <- statistical_table %>%
+  filter(value == "MNP")
 
-MNP_vs_FeSO4 %>%
-  ggplot(aes(taxon, lfc_supplementMNP)) +
-  geom_col() +
-  coord_flip()
+statistical_table_MNP <- statistical_table_MNP %>%
+  ggplot(aes(x = log2fc, y= -log10(qval), fill = significant))+
+  geom_point(size = 3, alpha = 0.3, color = "black")+
+  theme_minimal()+
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", alpha = 0.5)+
+  labs(title = "MNP vs. None",
+       x = "Log2FC",
+       y = "-log10(q)")+
+  theme(legend.position = "bottom")+
+  scale_y_continuous()+
+  scale_x_continuous()+
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size=12),
+        legend.position = "bottom")
+
+# FeSO4 vs. None
+
+statistical_table_FeSO4 <- statistical_table %>%
+  filter(value == "FeSO4")
+
+statistical_table_FeSO4 <- statistical_table_FeSO4 %>%
+  ggplot(aes(x = log2fc, y= -log10(qval), fill = significant))+
+  geom_point(size = 3, alpha = 0.3, color = "black")+
+  theme_minimal()+
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", alpha = 0.5)+
+  labs(title = "FeSO4 vs. None",
+       x = "Log2FC",
+       y = "-log10(q)")+
+  theme(legend.position = "bottom")+
+  scale_y_continuous()+
+  scale_x_continuous()+
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size=12),
+        legend.position = "bottom")
 
 
