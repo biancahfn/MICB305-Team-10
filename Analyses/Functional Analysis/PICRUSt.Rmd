@@ -106,14 +106,63 @@ daa_annotated_results_df_mnp_feso4 %>% filter(p_adjust < 0.05) %>% nrow()
 
 daa_annotated_results_df_feso4_none %>% filter(p_adjust < 0.05) %>% nrow()
 
-#peb_mnp_none = pathway_errorbar_fixed(abundance = metacyc_data_mnp_none,
-#                                      daa_results_df = daa_annotated_results_df_mnp_none,
-#                                      Group = metadata_mnp_none$supplement,
-#                                      wrap_label = T, wraplength = 60,
-#                                      fc_cutoff = 5, order_by_log = F,
-#                                      p_values_threshold = 0.05,
-#                                      order = "p_values",
-#                                      ko_to_kegg = F,
-#                                      p_value_bar = T,
-#                                      x_lab = "Pathway Name")
+
+# MNP vs None
+volcano_mnp_none <- daa_annotated_results_df_mnp_none %>%
+  ggplot(aes(x = log2_fold_change, y= -log10(p_adjust)))+
+  geom_point(size = 3, alpha = 0.3, color = "black")+
+  theme_minimal()+
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", alpha = 0.5)+
+  labs(title = "Functional Abundance of Predicted Pathways - MNP vs None",
+       x = "Log2 Fold Change",
+       y = "-log10(p-adjusted)")+
+  theme(legend.position = "bottom")+
+  scale_y_continuous()+
+  scale_x_continuous()+
+  theme(plot.title = element_text(size = 13, face = "bold"),
+        axis.title = element_text(size=12),
+        legend.position = "bottom")
+
+
+# FeSO4 vs None
+volcano_feso4_none <- daa_annotated_results_df_feso4_none %>%
+  ggplot(aes(x = log2_fold_change, y= -log10(p_adjust)))+
+  geom_point(size = 3, alpha = 0.3, color = "black")+
+  theme_minimal()+
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", alpha = 0.5)+
+  labs(title = "Functional Abundance of Predicted Pathways - FeSO4 vs None",
+       x = "Log2 Fold Change",
+       y = "-log10(p-adjusted)")+
+  theme(legend.position = "bottom")+
+  scale_y_continuous()+
+  scale_x_continuous()+
+  theme(plot.title = element_text(size = 13, face = "bold"),
+        axis.title = element_text(size=12),
+        legend.position = "bottom")
+
+
+# MNP vs FeSO4
+volcano_mnp_feso4 <- daa_annotated_results_df_mnp_feso4 %>%
+  ggplot(aes(x = log2_fold_change, y= -log10(p_adjust)))+
+  geom_point(size = 3, alpha = 0.3, color = "black")+
+  theme_minimal()+
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", alpha = 0.5)+
+  labs(title = "Functional Abundance of Predicted Pathways - MNP vs FeSO4",
+       x = "Log2 Fold Change",
+       y = "-log10(p-adjusted)")+
+  theme(legend.position = "bottom")+
+  scale_y_continuous()+
+  scale_x_continuous()+
+  theme(plot.title = element_text(size = 13, face = "bold"),
+        axis.title = element_text(size=12),
+        legend.position = "bottom")
+
+ggsave("volcano-mnp-none.png",
+       plot = volcano_mnp_none, width = 18, height = 10)
+
+ggsave("volcano-feso4-none.png",
+       plot = volcano_feso4_none, width = 18, height = 10)
+
+ggsave("volcano-plot-mnp-feso4.png",
+       plot = volcano_mnp_feso4, width = 18, height = 10)
 ```
