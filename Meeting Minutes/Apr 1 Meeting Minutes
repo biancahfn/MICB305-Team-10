@@ -1,0 +1,74 @@
+Apr 1 Meeting
+
+Change title to have it show more about the significance
+- Ex. Iron supplementation does not affect gut microbiome in 12 month old anemic breastfed infants
+
+Intro/ Background
+- Less text
+- 1 anemia (and why iron supplements matter)
+- 1 knowledge gap
+- 1 research question
+- Order: background, knowledge gap, then research question
+- Add more info about dataset
+    - Where they’re from, which kids we chose, sample size
+- Intro about different types of analysis performed
+- Mention how iron supplements affect healthy people 
+
+Aim 1
+- Remove titles from graphs
+- Don’t need to add all the info we found
+    - Can talk about it
+- Title shows result not aim
+
+Aim 2
+- No figure caption
+- Do left join for indicator (maybe just put in supp. In manuscript)
+- P value is yes or no not less or more significant 
+- Don’t need A and B on graph
+- No figure legends
+    - More point form
+    - Small bullet point on p-value, thresholds, Maaslin2, and mention that we looked at indicator species
+- Very little text
+
+Aim 3
+- Annotations and colours are good
+- Reflect P value
+- Don’t need to include goal and methods 
+    - Methods are considered common knowledge 
+    - But do mention that this is Metacyc
+- Present results then explain significance 
+- For the conclusion slide, mention all biological significance
+- Only mention significance if its only to specific aim
+
+Aim 4
+- Set reference as none 
+    - None should come first so it would be reference
+- MNP has some correlation
+- Talk about R-squared value
+    - Show well the line fits for the points
+- Index vs hemoglobin for each iron supplement
+- Interaction model and R-squared for correlation
+- Want high R square value and low P value
+- Test if slopes are different from each other 
+    - Group all supplements and make 
+- Title should be about correlation between diversity and iron and wondering if supplementation has effect on correlation
+    - And biological takeaway
+- 1 slide between correlation between irons
+- 1 slide on if they all correlate
+- 1 slide saying we cannot reject the null about significant 
+
+What does this mean
+- Say predicted function of microbiome
+- Mention how iron supplements affects healthy people compared to anemic patients
+- Do not say restore microbiome function 
+- Mention correlation between diversity and hemoglobin and ferritin but lack of supplements 
+- Add transition/animation for each bullet point or a graphic
+
+Future directions
+- Look at anemic groups compared to untreated 
+- Justification on why this is a future direction
+- Give examples when needed
+
+
+*consistently formatted and forms a story*
+
