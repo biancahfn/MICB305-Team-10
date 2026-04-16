@@ -1,0 +1,27 @@
+Aim 1: Alpha beta diversity
+Alpha: test Shannon, everything (facet graphs) 
+put one main one & then put rest in the supplemental section
+Atleast 3 alpha metrics
+Should all be kinda similar?
+Module 13 (make a for loop to make as many tests as we need)
+Use plot richness to get richness & then pull it out into ggplot (if doesn't work, just make 3 separate plots)
+Beta: kortis
+Run a few beta diversity metrics & save them as separate graphs
+Permanova for beta & alpha analysis?
+Run 3 metrics & put into plot
+
+Aim 2:
+Differential abundance uses ancombc (will most likely repeat for aim 3)
+Core microbiome 
+Try indicator species analysis if we want but not much may come out of it
+Sometimes nothing unique, just different so core microbiome & indicator species not as good
+
+Aim 3:
+Break into 3 groups & score 0,1,2, & combine the scores
+Could just plot a graph correlating hemoglobin vs ferritin lvls to see if they are tightly correlated (r-squared value is ..), so we can just do that analysis for either hemoglobin or ferritin
+If there is a difference, …
+If does not exist, repeat aim 2 stuff but subset into high low groups
+Start w/ linear regression model (hemoglobin vs ferritin) & then another for diversity metrics, & repeat atleast one of the analyses done in aim 2 
+
+
+

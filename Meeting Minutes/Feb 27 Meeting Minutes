@@ -1,0 +1,37 @@
+AIM 1: 
+Try to do alpha & diversity analysis this week
+Double check if we need Kruskal-Wallis or something else (parametric vs non-parametric)
+Visualization: facet by alpha diversity metric, not by supplementation group
+In beta analysis: may want to see if there may be a variable is also important that may cause variance within our groups (multivariant tests)
+
+AIM 2:
+Include in the planned comparisons: MNP vs FeSO4
+
+Visualization: relative abundance bar plots of key taxa (ones that are significantly different bc could otherwise may be talking about choosing biologically relevant taxa)
+
+AIM 3:
+Include a Spearman matrix (takes in a bunch of diff. variables) : eg. shannon vs ferritin: if there is a high correlation, do a matrix… which ones are interesting based on these results?
+
+AIM 4:
+Switch AIM 3 & AIM 4. 
+Could have pathways correlated to something (whats causing the shift?) 
+
+
+
+PROPOSAL:
+
+Intro:
+-anemia has been found to be related to gut microbiome.
+- iron found necessary, these species found to flourish
+- in anemia patients, have low blood iron, which causes …, because associated w/ …, we think will have these relationships
+
+Hypothesis or prediction;
+- reiterating what has been said, but in detail, specifically about our question
+
+Experimental Aims & Rationals:
+-biological inclusions and why those address our questions
+- justifies our research
+
+Proposed Approach:
+-assignment 2, but in more detail
+

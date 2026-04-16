@@ -1,0 +1,44 @@
+Manuscript:
+Title:
+- Can use the same title as our presentation 
+
+Intro & Background:
+- Describe how the original paper found sex differences in children. 
+- Literature on how it's all on other stuff, not how microbiome diversity varies between supplementation groups, so there is a knowledge gap
+
+Hypothesis:
+- Be more specific about what we're looking at
+
+Methods:
+- Wanted to query how the microbiome varies + functions we can get from it in case 
+- What primers are our data amplified by? What region, what trimmed? 
+- Comprehensive enough that someone can replicate the findings (specify any commands that you had to alter, classifiers, etc, NOT core basics about how to run qiime, etc). 
+
+Results:
+- Focus on biologically what they mean, dont need to restate p-values
+- Literature has supported that there are microbiota differences between anemic and non-anemic ⇒ Makes sense when you change biomarkers there is a difference in diversity ⇒ r^2 rlly small, so residuals are large, so hard to say there's a hugely significant correlation here (do NOT overstate it) ⇒ only a weak positive correlation
+- Assume people reading this are fellow scientists: dont write we used a volcano plot to… ⇒ just say we ran a volcano plot and …
+
+Limitations (subsection of the discussion)
+- Covered it well in the presentation
+- Only inferences based on DNA, cannot claim …level analysis (proteonomics, etc)
+- Lots of variables not corrected for (like various infections happening, like gut bugs (parasites) if they are known to be correlated to gut dysbiosis ⇒ might affect microbial infections)
+- Diet may have an effect (like breastfed vs. non-breastfed)
+- Samples are from Peru, so microbiome does fluctuate massively depending on geography and style of living, so findings not necessarily translated across various populations in general (a large proportion of this dataset is from a particularly malnourished population)
+- We did not account for sex differences which was known to have a microbial difference in the original paper
+
+Acknowledgements:
+- Talks about systematic support received (Avril, etc)
+- People who supplied the data, infants, etc
+
+Formatting: 
+- Directly before results section that its corresponding 
+- Can also upload images as one continuous pdf for better quality 
+- Supplemental figures are also a completely different pdf
+
+
+Editing:
+- Making sure all taxonomic names are italicized
+- FeSO4 needs to be formatted correctly
+- Look at the module that has what to include, etc (what tense to write in, etc → all our findings in past sense, all the stuff we found from other papers as present tense)
+- Make sure it's cohesive overall (have someone check everything)

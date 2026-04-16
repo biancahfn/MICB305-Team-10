@@ -1,0 +1,22 @@
+Among 12 month old breastfed infants, how does iron supplementation type (MNP vs. FeSO4 vs. none) influence gut microbiome composition, 
+and how do these microbial differences relate to hemoglobin and ferritin levels?
+
+Aim 0: 
+filter out to just 12 months old that are breastfeeding. 
+Filter everything that is not one of those supplementation type
+Define what anemia lvls should look like (either anemic or non-anemic, high lvls vs low lvls, etc)
+
+Aim 1: alpha and beta diversity metrics
+Split the samples by their supplementation ⇒ then do alpha diversity metrics (module 13 On R)
+Shannon, observed features…Facet graphs to make multiple bc different metrics can have slightly different, results
+Beta diversity: measures how diff. Things are overall vs alpha which is just raw counts  
+Try to check if sex is a huge confounding variable & making our data split → if it does, can look more into it 
+
+Aim 2: dive deeper into alpha diversity? 
+Stuff in module 14 (abundance measures or differential abundance to see which groups are significantly increased relative to untreated control group)
+Take all groups comparing to the negative no drug control 
+Recommended 2 people for this
+
+Aim 3: 
+If dont see differences in those group, could explore what could be possibly causing it 
+Can just write linear regression model and explore diversity metrics in the Group Assignment 

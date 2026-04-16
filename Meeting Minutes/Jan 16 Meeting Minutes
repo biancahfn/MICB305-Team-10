@@ -1,0 +1,30 @@
+Possible research topics:
+1. MS
+MS dataset types of medication on microbiome already has some research, but can include a different variable (within what's available in the MS dataset). 
+
+Best if you interact with a different research already done like saying it makes sense that medication already affects microbiome, as shown in X study.
+Could add something new like how certain medication interacts w/ different things
+If want to look at duration, make sure what the medication are about. Like what if medication is linked w/ severity, and if its consistently taken.
+Maybe see which medication affects microbiome the most?
+
+2. Familial Dysautonomia
+Exploring disease severity & analyze 
+Looking at disease severity through random forest (take a bunch of variables from a dataset & see how well they predict outcome A vs B) 
+or why those strains are causing those phenotypes
+
+3. Anemia during infancy
+Mothers taking supplement on infants microbiome (drinking breastmilk vs not drinking breastmilk as control)
+Mothers not taking supplement (drinking breastmilk vs not) 
+Seeing how supplement affects infant microbiome
+Random forest requires big dataset 
+Ideally 10 samples per group 
+
+
+
+
+
+
+
+
+
+
